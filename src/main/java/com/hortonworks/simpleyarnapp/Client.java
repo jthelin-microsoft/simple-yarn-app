@@ -121,12 +121,15 @@ public class Client {
     for (String c : conf.getStrings(
         YarnConfiguration.YARN_APPLICATION_CLASSPATH,
         YarnConfiguration.DEFAULT_YARN_APPLICATION_CLASSPATH)) {
-      Apps.addToEnvironment(appMasterEnv, Environment.CLASSPATH.name(),
-          c.trim());
+      Apps.addToEnvironment(appMasterEnv,
+          Environment.CLASSPATH.name(),
+          c.trim(),
+          File.pathSeparator);
     }
     Apps.addToEnvironment(appMasterEnv,
         Environment.CLASSPATH.name(),
-        Environment.PWD.$() + File.separator + "*");
+        Environment.PWD.$() + File.separator + "*",
+        File.pathSeparator);
   }
   
   public static void main(String[] args) throws Exception {
